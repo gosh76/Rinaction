@@ -14,3 +14,27 @@ hist(x)
 y <- runif(20)*10
 library()
 search()
+# practising a & b
+a = c(23,34,12,54,67,87)
+b = c(13,23,32,14,89,90)
+a*b
+a+b
+a-b
+a/b
+mean(a)
+median(a)
+mean(b)
+median(b)
+sd(a)
+sd(b)
+cor(a,b)
+plot(a,b)
+pdf("Rinaction.pdf")
+myymatrix <- matrix(1:10, nrow=2, ncol=5,byrow=TRUE)
+mymatrix
+myymatrix
+myymatrix*2
+matrix2 <- matrix(5:20,nrow=3,byrow=TRUE)
+matrix2
+rm(matrix2)
+file.edit("~/.Renviron")
