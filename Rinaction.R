@@ -38,3 +38,17 @@ matrix2 <- matrix(5:20,nrow=3,byrow=TRUE)
 matrix2
 rm(matrix2)
 file.edit("~/.Renviron")
+file.exists("~/.Renviron")
+R_LIBS="E:/rWork/rLibrary"
+matrix2 <- matrix(6:20,nrow=3,byrow=TRUE)
+matrix2
+rm(myymatrix)
+matrix1 <- matrix(1:10,nrow=2,byrow=TRUE)
+matrix1
+m1 <- matrix1*matrix2
+rm(matrix1)
+rm(matrix2)
+m1 <- matrix(1:6,nrow=3,byrow=TRUE)
+m1
+m2<- matrix(4:5,nrow=2)
+m2
