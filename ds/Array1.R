@@ -32,3 +32,4 @@ apply(salesarray,c(2),sum) # deptt
 apply(salesarray,c(3),sum) # coywise
 apply(salesarray,c(2,3),sum) #deptt & coywise
 apply(salesarray,c(1,2,3),sum)
+
