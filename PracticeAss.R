@@ -54,3 +54,40 @@ m.table
 cbind(m.table)
 m1 = matrix(marks,students)
 hist(m1)
+# class
+set.seed(1234)
+x = ceiling(rnorm(100,60,15))# generates random normal distribution(pts,mean,sd)
+x
+mean(x)
+table(x)
+range(x)
+bks = seq(0,100,10)#seq(min(x),max(x),by=10)
+bks
+x[c(1,2,3,4,5)] = c(0,10,11,99,100)
+x
+(bks = seq(0,100,10))# round brackets to display variable
+classint1 = cut(x,breaks=bks)
+head(classint1,n=5)
+head(x,n=5)
+table(classint1)
+table(classint1,useNA='ifany')
+classint2 = cut(x,breaks=bks,right=F)
+head(classint2,n=5)
+head(x,n=5)
+table(classint2,useNA='ifany')
+# correct problem of NA
+classint1a = cut(x,breaks=bks,include.lowest=T)
+as.character(head(classint1a,n=5))
+head(x,n=5)
+table(classint1a,useNA='ifany')
+classint2a =cut(x,breaks=bks,include.lowest=T,right=F)
+as.character(head(classint2a,n=5))
+table(classint2a,useNA='ifany')
+#giving labels
+classint1b = cut(x,breaks=bks,include.lowest=T,labels=LETTERS[1:length(bks)-1])
+as.character(head(classint1b,n=5))
+LETTERS[1:5];letters[1:8];month.abb[1:5]
+length(bks)# length is 11 but we need 10 intervals so length(bks)-1
+LETTERS[1:length(bks)-1]
+head(x,n=5)
+table(classint1b,useNA='ifany')
