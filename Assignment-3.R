@@ -70,4 +70,17 @@ sdf[2,'Students'] = 'Student2'
 sdf[3,'Students'] = 'Student3'
 sdf[4,'Students'] = 'Student4'
 sdf[5,'Students'] = 'Student5'
-
+# Q-5
+set.seed(1234)
+m1 <- ceiling(runif(30,1000,2000))
+m1
+a1 <- array(m1,dim=c(5,3,2),dimnames=list(c('S1','S2','S3','S4','S5'),c('Graduate','PG','Diploma'),c('DS','Law')))
+a1
+a1['S5','PG','DS']
+a1['S1','Diploma','Law']
+mean(a1)
+apply(a1,c(1),sum)
+apply(a1,c(2),sum)
+apply(a1,c(3),sum)
+a1['S1',,]
+a1[,,'DS']
