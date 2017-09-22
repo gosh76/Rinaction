@@ -67,3 +67,5 @@ feestatus = function(x){
 for (i in c(1:11)){
   feestatus(df2$fees[i])
 }
+split(df2[1:3],df2$gender)
+aggregate(df2$fees,list(df2$course),sum)
