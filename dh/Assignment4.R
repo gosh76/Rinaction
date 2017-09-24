@@ -1,5 +1,7 @@
+# Reading dsstudents2 and storing it as dataframe df3
 df3 = read.csv("./data/dsstudents2.csv",na.strings = '')# reading dsstudents2 in R
 df3
+#checking structure and correcting format of column classes
 str(df3)# checking structure of df3
 df3$name <- as.character(df3$name)#converting df3$name from factor to character
 df3$dob <- as.Date(df3$dob,format='%d-%b-%y')#converting df3$dob from factor to date
@@ -7,10 +9,13 @@ df3$email <- as.character(df3$email)#converting from factor to character
 df3$city <- as.character(df3$city)#converting from factor to character
 str(df3)
 df3
+# creating age column
 df3$age <- ceiling(as.numeric(difftime(Sys.Date(),df3$dob,units='days')/365))#calculating age
 df3
+#sum of missing values & listing rows having missing values
 sum(is.na(df3))# no. of missing values
 df3[!complete.cases(df3),]# missing rows
+#replacing NAs with appropriate values
 df3$hostel[is.na(df3$hostel)] <- names(table(df3$hostel)[1])#replacing NA with 'FALSE'having greater occurrence
 df3$hostel
 df3$fees[is.na(df3$fees)] <- median(df3$fees,na.rm=T)#replacing NA with median of fees
@@ -21,11 +26,12 @@ df3$excel[is.na(df3$excel)] <- median(df3$excel,na.rm=T)#replacing NA with media
 df3$excel
 df3$sql[is.na(df3$sql)] <- median(df3$sql,na.rm=T)#replacing NA with median
 sum(is.na(df3))# check for NAs after replacing all NAs
+#Adding a row in df3
 df1 <- data.frame(17000, 'Ramesh Singh', 'MSC','',TRUE, '1994-10-17', 50000,
-                  'ramesh@gmail.com','', 'Delhi','','','','')
+                  'ramesh@gmail.com','', 'Delhi','','','','')#creating one row dataframe
 df1
 str(df1)
-colnames(df1) <- colnames(df3[1:14])
+colnames(df1) <- colnames(df3[1:14])#replacing column names of df1 with df3 column names
 colnames(df1)
 df1
 df1$name <- as.character(df1$name)#converting from factor to character datatype
@@ -56,14 +62,17 @@ df3$stats[is.na(df3$stats)] <- mean(df3$stats,na.rm=T)#replacing NA with mean of
 sum(is.na(df3))
 str(df3)
 df3
+# creating df3a for summary like sum,mean,median in one dataframe
 df3a <- df3[11:14]#creating df3a
-rownames(df3a) <- df3$rollno
+rownames(df3a) <- df3$rollno# putting rollno as row names
 df3a
-addmargins(as.table(as.matrix(df3a)),c(2,1,1),list(sum,mean,median))#first matrix,then table,then addmargins
+addmargins(as.table(as.matrix(df3a)),c(2,1,1),list(sum,mean,median))#addmargins to create row sum,column means,medians
+#creating course vs gender summary & proportion tables
 t1 <- table(df3$course,df3$gender)
 addmargins(t1)#summary of course vs gender
 prop.table(t1)#proportions of course-gender table
-df3c <- df3[,c(1,2,11,12,13,14)]
+#Grade function & Rank
+df3c <- df3[,c(1,2,11,12,13,14)]# creating dataframe df3c having rollno,names & subject marks
 df3c
 df3c$total <- rowMeans(df3c[,c(3:6)])#creating total column
 df3c
@@ -84,6 +93,25 @@ df3c$ranks <- rank(-df3c$total)#rank 1 to largest total marks
 df3c
 df3c$name[df3c$ranks==5]#gives Shruti Sinha-5th rank holder
 df3
+#Pending
 df4 <- df3[,c(3,11,12,13,14)]
 df4
+#split wrt course,wrt gender-hostel
+split(df3[1:3],df3$course)#split according to course
+split(df3[1:3],list(df3$gender,df3$hostel))#split wrt gender-hostel
+#adding bigdata marks and scaling
+bigdata <- ceiling(runif(12,100,150))
+bigdata
+df3d <- df3#creating new dataframe - df3d
+df3d
+df3d$bigdata <- bigdata#adding bigdata to df3d
+df3d
+?scale
+df3d$bigdataS <- scale(df3d$bigdata,center=F)#scaling bigdata marks
+df3d
+#creating barplot
+df3e <- df3d[,c('rpgm','excel','sql','stats','bigdata')]
+df3e
+g1 <- colMeans(df3e)
+barplot(g1,main = 'Average Marks',ylim=c(0,140))#barplot of average marks
 
