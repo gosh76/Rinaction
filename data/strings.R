@@ -125,3 +125,41 @@ sort(q1)
 sort(q1,decreasing = T)
 q2 <- c('qwerty',34,23,'tyrol')
 sort(q2)
+library(stringr)
+str_c('what','is','this')#concatenates elements as paste does
+str_c('why','is','he',NULL,'doing','that',character(0))# removes null,character(0)
+str_c('why','is','that',sep = "-")
+str_length(c("don't",'shout',NULL))# gives length of string(s) as nchar()
+str_length(c('what','the','hell',NA))# keeps NA as NA
+nchar(factor(c(3,2,4,5)))#gives error-'nchar()' requires a character vector
+str_length(factor(c('light','dark','tear','trap')))#handles factor as well as character vector
+str_sub('startrek',start=4,end = 7)#subsetting string as substr-for extracting substrings
+str_sub('primavera',start=-5,end=-2)
+str_sub('impressed',start=-6,end=-3)#handles negative indices as well
+str_sub('primavera',seq_len(nchar('primavera')))
+str_sub('qwerty',-seq_len(nchar('qwerty')))
+k = 'knighted'
+str_sub(k,1,3) <- 'rat'#also for replacing substrings
+k
+r = 'rampant'
+str_sub(r,2,5) <- 'prep'
+r
+str_sub(r,-5,-3) <- 'per'
+r
+str_dup('qwerty',3)# duplicates & concatenates
+str_dup('pose',1:3)#first times=1,then 2,then 3
+x <- c('star','galaxy','universe')
+str_dup(x,3)#duplicates each element of x 3 times
+str_dup(x,1:3)# first element 1,2nd element 2 ,3rd element 3 times
+str_pad('define',width = 10,pad='#',side = 'left')#for padding string to a total width
+str_pad('respite',width=20,pad='$',side = 'right')
+sm = c(
+  "I may not have gone",
+  "where I intended to go,",
+  "but I think I have ended up",
+  "where I needed to be")
+cat(str_wrap(sm,width=20,indent = 3))
+str_trim(c('  startrek','tyrol  '),side = 'both')
+word('what are you doing',2,3)#for extracting words from a sentence-2 is position of Ist word
+word('peace be with you',1,3)
+word('sorrow is limited only by the mind of the person',4,-2)
