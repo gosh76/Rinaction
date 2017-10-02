@@ -93,9 +93,10 @@ df3c$ranks <- rank(-df3c$total)#rank 1 to largest total marks
 df3c
 df3c$name[df3c$ranks==5]#gives Shruti Sinha-5th rank holder
 df3
-#Pending
+#Rowwise & Columnwise means-Pending
 df4 <- df3[,c(3,11,12,13,14)]
 df4
+
 #split wrt course,wrt gender-hostel
 split(df3[1:3],df3$course)#split according to course
 split(df3[1:3],list(df3$gender,df3$hostel))#split wrt gender-hostel
