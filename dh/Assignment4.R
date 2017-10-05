@@ -94,10 +94,11 @@ df3c
 df3c$name[df3c$ranks==5]#gives Shruti Sinha-5th rank holder
 df3
 #Rowwise & Columnwise means-Pending
-df4 <- df3[,c(3,11,12,13,14)]
+df4 <- df3[,c(11,12,13,14)]
 df4
+addmargins(as.table(as.matrix(df4)),c(2,1),list(mean,mean))
 
-#split wrt course,wrt gender-hostel
+df5#split wrt course,wrt gender-hostel
 split(df3[1:3],df3$course)#split according to course
 split(df3[1:3],list(df3$gender,df3$hostel))#split wrt gender-hostel
 #adding bigdata marks and scaling
