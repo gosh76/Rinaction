@@ -14,13 +14,17 @@ df3$age <- ceiling(as.numeric(difftime(Sys.Date(),df3$dob,units='days')/365))#ca
 df3
 #sum of missing values & listing rows having missing values
 sum(is.na(df3))# no. of missing values
+table(is.na(df3))
 df3[!complete.cases(df3),]# missing rows
+colSums(is.na(df3))#no. of na values in each column
 #replacing NAs with appropriate values
+x = sort(table(df3$city),decreasing = T)[1]
+names(x)
 df3$hostel[is.na(df3$hostel)] <- names(table(df3$hostel)[1])#replacing NA with 'FALSE'having greater occurrence
 df3$hostel
 df3$fees[is.na(df3$fees)] <- median(df3$fees,na.rm=T)#replacing NA with median of fees
 df3$fees
-df3$city[is.na(df3$city)] <- 'Delhi'#replacing NA with Delhi
+df3$city[is.na(df3$city)] <- names(x)#replacing NA with Bangalore
 df3$city
 df3$excel[is.na(df3$excel)] <- median(df3$excel,na.rm=T)#replacing NA with median
 df3$excel
@@ -94,8 +98,9 @@ df3c
 df3c$name[df3c$ranks==5]#gives Shruti Sinha-5th rank holder
 df3
 #Rowwise & Columnwise means-Pending
-df4 <- df3[,c(11,12,13,14)]
-df4
+df4 <- df3[,c(3,11,12,13,14)]
+aggregate(df4[,c('rpgm','sql','excel','stats')],by=list(df4$course),FUN = sum)
+
 addmargins(as.table(as.matrix(df4)),c(2,1),list(mean,mean))
 
 df5#split wrt course,wrt gender-hostel
