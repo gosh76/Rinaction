@@ -31,3 +31,8 @@ mad(x,center=mean(x))# mean absolute deviation
 x = c(7,4,10,9,15,12,7,9,7)
 mean(x)
 median(x)
+library(modeest)
+x = c(2,3,4,4,5,5)
+m = mlv(x,method = 'mfv')
+m
+# getmode(x)
