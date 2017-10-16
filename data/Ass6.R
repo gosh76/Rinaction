@@ -21,16 +21,20 @@ i
 # mean of first 4 variables specieswise
 agg <- aggregate(i,by=list(i$Species),FUN=mean,na.rm=TRUE)
 agg
-
-
-
-M+1
-M+c(1,2)
-M+c(1,2,3)
-cbind(M,M+c(1,2,3))
-(dx = colMeans(M))
-sweep(M,2,dx,FUN='-')
-sweep(M,2,dx,FUN='*')
-sweep(M,2,dx,FUN='^')
-cbind(M,M[,1]*M[,2])
-rbind(M,M[1,]*M[2,])
+# Q2 - create new environment
+e <- new.env()
+# create 2 environment variables
+e$a <- matrix(1:12,nrow=4)
+e$b <- array(c(1:3*4*2),dim=c(3,4,2))
+# mean of two variables
+mean(e$a)
+mean(e$b)
+class(e$a)
+class(e$b)
+# Q3 - list
+l1 <- list(1:20,55:100,mtcars$mpg,mtcars$wt)
+l1
+# apply sum to each element of list l1
+lapply(l1,sum)
+# results in vector form
+sapply(l1,sum)
