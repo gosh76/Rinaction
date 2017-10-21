@@ -1,0 +1,21 @@
+a1 <- array(1:12,dim = c(3,2,2),dimnames = list(c('r1','r2','r3'),c('c1','c2'),c('z1','z2')))
+a1
+a1[1,1,2]
+a1[2,2,1]
+a1[3,2,1]
+a1[2,2,2]
+a1[2,c(1,2),2]
+a1[3,c(1,2),1]
+sum(a1[3,c(1,2),2])
+a1[1,,]
+a1[,2,]
+a1[,,2]
+colnames(a1)
+rownames(a1)
+dimnames(a1)
+nrow(a1)
+ncol(a1)
+a1
+apply(a1,1,sum)
+apply(a1,2,sum)
+apply(a1,3,sum)
