@@ -27,3 +27,5 @@ p1 = prop.table(mr,margin = 1)
 rowSums(p1)
 p2 = prop.table(mr,margin = 2)
 colSums(p2)
+df2
+df2
