@@ -1,0 +1,23 @@
+faithful
+mean(faithful$eruptions)
+median(faithful$eruptions)
+quantile(faithful$eruptions,c(0.25,0.5,0.75))
+quantile(faithful$eruptions,c(0.32,0.57,0.98))
+range(faithful$eruptions)
+attach(faithful)
+IQR(eruptions)
+sqrt(var(eruptions))
+var(eruptions)
+library(fBasics)
+skewness(eruptions)
+kurtosis(eruptions)
+stem(eruptions)
+plot(eruptions,waiting)
+abline(lm(waiting~eruptions), col="red") # regression line (y~x)
+hist(eruptions,ylim = c(0,80),xlim = c(1,6))
+boxplot(eruptions)
+InsectSprays
+boxplot(count ~ spray, data = InsectSprays,xlab = "Type of spray", ylab = "Insect count",
+main = "InsectSprays data", varwidth = TRUE, col = "lightgray")
+cov(eruptions,waiting)
+cor(eruptions,waiting)
