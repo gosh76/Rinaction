@@ -8,6 +8,8 @@ library('rms') # For step wise regression
 df1 = read.csv("./data/Melbourne_house.csv")
 str(df1)
 colSums(is.na(df1))
+df1$Address <- NULL
+str(df1)
 df1[1:10,c('Bedroom2','Bathroom','Landsize',"BuildingArea")]
 df1$Bedroom2[is.na(df1$Bedroom2)] = median(df1$Bedroom2,na.rm = T)
 colSums(is.na(df1))
@@ -33,6 +35,11 @@ tst = subset(df1,split==F)
 str(tst)
 trn1 = trn[1:5000,]
 str(trn1)
-m1 = lm(Price~.-Price,data=trn1)
+m1 = lm(Price~.-Price,data=df1)
 summary(m1)
-pred1 = predict(m1,newdata = tst[1:10,])
+pred1 = predict(m1,newdata = df1[,-4])
+str(pred1)
+df1$pred = pred1
+df1$diff = df1$pred - df1$Price
+summary(df1$diff)
+var(df1$diff)
