@@ -1,24 +1,12 @@
-iris
-str(iris)
+library(ggplot2)
+library(scatterplot3d)
+library(MASS)
+library(devtools)
 i = iris
 i
 names(i) = c('SL','SW','PL','PW','SP')
 str(i)
-is.na(i)
-sum(is.na(i))
-complete.cases(i)
-!complete.cases(i)
-#i$SP = factor(i$SP,levels=c(0,1,2))
-library(caTools)
-s1 = sample.split(i$SL,SplitRatio=0.8)
-trn = subset(i,s1=T)
-test = subset(i,s1=F)
-c1 = glm(SP~.,family = binomial,data=trn)
-i
-str(i)
-summary(c1)
-pred1 = predict(c1,type='response',newdata=test[-5])
-str(pred1)
-class(pred1)
-pred1[1:10]
-str(trn)
+i.lda <- lda(i$SP ~ .-SP, data =i)
+predict.iris_LDA <- predict(i.lda)
+predict.iris_LDA$class[1:10]
+table(i$SP, predict.iris_LDA$class)
