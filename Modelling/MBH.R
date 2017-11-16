@@ -28,6 +28,13 @@ df1$Price[is.na(df1$Price)] = median(df1$Price,na.rm = T)
 colSums(is.na(df1))
 plot(df1$Price,df1$BuildingArea,ylim=c(0,500))
 cor(df1$Price,df1$BuildingArea)
+null = lm(Price~1,data=df1)
+full = lm(Price~.,data=df1)
+step(null, scope=list(lower=null, upper=full), direction="forward")
+m1 = lm(formula = Price ~ Suburb + Rooms + Type + Method + Bathroom + 
+          Car + Date + YearBuilt + CouncilArea + Bedroom2 + Landsize + 
+          BuildingArea, data = df1)
+summary(m1)
 split = sample.split(df1$Price,SplitRatio = 0.8)
 trn = subset(df1,split == T)
 str(trn)
@@ -35,9 +42,11 @@ tst = subset(df1,split==F)
 str(tst)
 trn1 = trn[1:5000,]
 str(trn1)
-m1 = lm(Price~.-Price,data=df1)
-summary(m1)
-pred1 = predict(m1,newdata = df1[,-4])
+m2 = lm(formula = Price ~ Suburb + Rooms + Type + Method + Bathroom + 
+          Car + Date + YearBuilt + CouncilArea + Bedroom2 + Landsize + 
+          BuildingArea, data = trn)
+summary(m2)
+pred1 = predict(m2,newdata = tst[,-4])
 str(pred1)
 df1$pred = pred1
 df1$diff = df1$pred - df1$Price
