@@ -11,6 +11,36 @@ colSums(is.na(df1))
 df1$Address <- NULL
 str(df1)
 df1[1:10,c('Bedroom2','Bathroom','Landsize',"BuildingArea")]
+library(car)
+par(mar=c(3,3,3,3))
+plot(df1$Landsize,df1$BuildingArea,ylim=c(0,300),xlim=c(0,900))
+plot(df1$Price,df1$Landsize,ylim=c(0,800),xlim=c(0,2000000))
+plot(df1$Price,df1$BuildingArea,ylim=c(0,400),xlim=c(0,2000000))
+plot(df1$Price,df1$Bathroom,ylim=c(0,8),xlim=c(0,500000))
+plot(df1$Price,df1$Rooms,ylim=c(0,8),xlim=c(0,800000))
+#min.price for 1room-200000,2room-250000,3room-300000,4room-400000,5r-600000)
+plot(df1$BuildingArea,df1$Bedroom2,ylim=c(0,8),xlim=c(0,300))
+plot(df1$BuildingArea,df1$Bathroom,ylim=c(0,8),xlim=c(0,300))
+plot(df1$Price,df1$Suburb)
+
+
+
+
+#scatterplotMatrix(df1)
+cor(df1$Price,df1$BuildingArea,method = "pearson", use = "complete.obs")#0.09
+cor(df1$Price,df1$Landsize,method = "pearson", use = "complete.obs")#0.037
+cor(df1$Landsize,df1$BuildingArea,method = "pearson", use = "complete.obs")#0.47
+cor(df1$Price,df1$Bedroom2,method = "pearson", use = "complete.obs")#0.47
+cor(df1$Price,df1$Bathroom,method = "pearson", use = "complete.obs")#0.46
+cor(df1$BuildingArea,df1$Bathroom,method = "pearson", use = "complete.obs")#0.13
+cor(df1$Landsize,df1$Bathroom,method = "pearson", use = "complete.obs")#0.03
+cor(df1$BuildingArea,df1$Bedroom2,method = "pearson", use = "complete.obs")#0.14
+cor(df1$Price,df1$Rooms,method = "pearson", use = "complete.obs")#0.496
+cor(df1$Price,df1$Car,method = "pearson", use = "complete.obs")#0.238
+cor(df1$Price,df1$YearBuilt,method = "pearson", use = "complete.obs")#-0.32
+cor(df1$Price,df1$Lattitude,method = "pearson", use = "complete.obs")#-0.203
+cor(df1$Price,df1$Longtitude,method = "pearson", use = "complete.obs")#0.196
+
 df1$Bedroom2[is.na(df1$Bedroom2)] = median(df1$Bedroom2,na.rm = T)
 colSums(is.na(df1))
 df1$Bathroom[is.na(df1$Bathroom)] = median(df1$Bathroom,na.rm = T)
