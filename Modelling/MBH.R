@@ -111,7 +111,7 @@ step(null, scope=list(lower=null, upper=full), direction="forward")
 m1 = lm(formula = Price ~ Rooms + Suburb + Method + Type + Bathroom + 
           Date + CouncilArea + Car + YearBuilt + Lattitude + Landsize + 
           Longtitude + BuildingArea, data = df1)
-summary(m1)
+summary(m1)#r2-0.4243
 -----------------------------------------------------------------------------------
 
 split = sample.split(df1$Price,SplitRatio = 0.8)
@@ -139,12 +139,9 @@ var(df1$diff)
 
 -------------------------------------------------------------------------------------
 pred = predict(m1,df1[,-4])
+pred[1:10]
+pred[pred<0]=0
 error = df1$Price - pred
 rmse=sqrt(mean(error*error))
-rmse
-summary(m1)
-length(unique(df1$Suburb))
-length(unique(trn$Suburb))
-length(unique(tst$Suburb))
-levels(trn$Suburb) = levels(df1$Suburb)
-str(trn$Suburb)
+rmse#491871.4
+
