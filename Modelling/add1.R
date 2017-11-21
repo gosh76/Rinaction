@@ -1,0 +1,43 @@
+mtcars
+(mtcars.lm = lm(mpg~1,data=mtcars))
+summary(mtcars.lm)
+add1(mtcars.lm,mtcars,test='F')#find best predictor
+mtcars.lm = lm(mpg~wt,data=mtcars)
+summary(mtcars.lm)
+add1(mtcars.lm,mtcars,test='F')
+mtcars.lm = lm(mpg~wt+cyl,data=mtcars)
+summary(mtcars.lm)
+add1(mtcars.lm,mtcars,test='F')
+
+fit.full = lm(mpg~wt+cyl+hp+am,data=mtcars)
+summary(fit.full)
+drop1(fit.full,test='F')
+drop1(update(fit.full,~.-am),test='F')
+drop1(update(fit.full,~.-am-hp),test='F')
+fit1 = lm(mpg~wt,data=mtcars)
+fit2 = lm(mpg~wt+cyl,data=mtcars)
+anova(fit1,fit2)#fit2 is better
+AIC(fit1,fit2)#fit2 is better
+coefficients(fit2)
+confint(fit2,level = 0.95)
+fitted(fit2)
+residuals(fit2)
+anova(fit2)
+vcov(fit2)
+influence(fit2)
+library(MASS)
+fit = lm(mpg~wt+cyl+hp+am,data=mtcars)
+step = stepAIC(fit,direction='both')
+step$anova
+
+library(leaps)
+leaps = regsubsets(mpg~wt+cyl+hp+am,data=mtcars,nbest=10)
+summary(leaps)
+plot(leaps,scale='r2')
+library(car)
+subsets(leaps,statistic='rsq')
+library(relaimpo)
+calc.relimp(fit,type=c('lmg','last','first','pratt'),rela=T)
+boot=boot.relimp(fit,b=1000,type=c('lmg','last','first','pratt'),rank=T,diff=T,rela=T)
+booteval.relimp(boot)
+plot(booteval.relimp(boot,sort=T))
