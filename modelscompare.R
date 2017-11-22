@@ -35,3 +35,5 @@ cbind(mtcars$am,mtcars$wt,mtcars$hp,p1,p1a)
 (xtab= table(mtcars$am,p1a))
 library(caret)
 caret::confusionMatrix(xtab)
+car::vif(fit3)
+sqrt(car::vif(fit3))>2
