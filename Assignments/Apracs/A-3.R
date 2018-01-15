@@ -70,3 +70,16 @@ apply(a1,c(1),sum)
 apply(a1,c(2),sum)
 apply(a1,c(3),sum)
 apply(a1,c(2,3),sum)
+#Q6
+Students =c('S1', 'S2', 'S3', 'S4', 'S5')
+Gender = c('M','F', 'M', 'M', 'F')
+Age = c(23, 22, 21, 25, 22)
+City = c('Delhi', 'Noida', 'Lucknow', 'Delhi', 'Noida')
+Cat = c('Gen', 'OBC', 'Gen', 'SCST', 'Gen')
+df = data.frame(Students,Gender,Age,City,Cat,stringsAsFactors = F)
+df
+table(Cat)
+table(Gender)
+str(df)
+df$Students = c(paste('Student',1:5,sep=""))
+df
