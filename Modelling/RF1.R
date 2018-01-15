@@ -1,0 +1,43 @@
+list.of.packages <- c("caret", "e1071","ggplot2","rpart", "rpart.plot","pROC","ROCR","randomForest","caTools")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages, repos="http://cran.rstudio.com/")
+
+library(caret)
+library(ggplot2)
+library(rpart.plot)
+library(pROC)
+library(ROCR)
+library(rpart)
+library(randomForest)
+library(caTools)
+library(e1071)
+
+df = read.csv("./data/census.csv")
+str(df)
+summary(df)
+colSums(is.na(df))
+set.seed(3000)
+s1 = sample.split(df$over50k,SplitRatio = 0.6)
+trn = subset(df,s1==T)
+tst = subset(df,s1==F)
+dim(trn)
+dim(tst)
+cart1 = rpart(over50k~.,data = trn,method='class')
+prp(cart1)
+pred = predict(cart1,newdata = tst,type='class')
+table(tst$over50k,pred)
+confusionMatrix(tst$over50k,pred)
+pred1 = predict(cart1,newdata = tst)
+pred1[1:5]
+roc1 = roc(response=tst$over50k,predictor=pred1[,2],level = rev(levels(tst$over50k)))
+roc1
+plot(roc1)
+#rf
+rf1 = randomForest(over50k~.,data=trn)
+rf1
+predrf = predict(rf1,newdata = tst,type='class')
+confusionMatrix(tst$over50k,predrf)
+vu = varUsed(rf1, count=TRUE)
+vusorted = sort(vu, decreasing = FALSE, index.return = TRUE)
+dotchart(vusorted$x, names(rf1$forest$xlevels[vusorted$ix]), main = "Variable Importance Chart_Splitting")
+varImpPlot(rf1, main = "Variable Importance Chart_Impurity Red")
