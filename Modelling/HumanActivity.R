@@ -11,7 +11,8 @@ train = read.csv("./data/hatrain.csv")
 dim(train)
 test = read.csv("./data/hatest.csv")
 dim(test)
-
+sum(is.na(train))
+sum(is.na(test))
 #multinomial model
 tr1 = train
 tes1 = test
