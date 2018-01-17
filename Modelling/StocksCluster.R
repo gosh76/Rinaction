@@ -42,6 +42,12 @@ summary(model1)
 #ReturnFeb   -0.47577
 #exp(coeff) to be done
 # predicting
+EreturnApr = exp(1.12063)
+EreturnApr#3.066786
+EreturnJuly = exp(0.78394)
+EreturnJuly#2.190084
+EreturnMay = exp(0.68935)
+EreturnMay# 1.99242
 pred = predict(model1,newdata = tst,type = 'response')
 pred[1:5]
 pred1 = ifelse(pred>0.5,1,0)
@@ -85,7 +91,11 @@ summary(cmodel12)
 #ReturnJune    1.1095 
 #ReturnJuly    1.4511
 #ReturnApr     0.8685
-#ReturnMay     0.8885 
+#ReturnMay     0.8885
+#oddsratio
+E1july = exp(1.4511)#4.2678
+E1june = exp(1.1095)#3.0328
+E1may = exp(0.8885)#2.4314
 cpred1 = predict(cmodel12,newdata = tst1,type = 'response')
 cpred1[1:5]
 cpred1f = ifelse(cpred1>0.5,1,0)
@@ -122,6 +132,11 @@ summary(cmodel32)
 #ReturnMar     1.0360
 #ReturnApr     1.6651
 #ReturnAug     1.7073
+#oddsratio
+E2aug = exp(1.7073)#5.514
+1/(1+5.514)
+E2apr = exp(1.6651)#5.286
+E2mar = exp(1.0360)#2.817
 cpred3 = predict(cmodel32,newdata = tst3,type = 'response')
 cpred3f = ifelse(cpred3>0.5,1,0)
 confusionMatrix(tst3$PositiveDec,cpred3f)
@@ -144,7 +159,10 @@ summary(cmodel41)
 #ReturnApr    -1.3687
 #ReturnOct    -1.0956 
 #ReturnJuly   -1.1375
-
+#oddsratio
+E4jan = exp(0.8829)#2.417
+E4mar = exp(-0.5916)#0.553
+E4oct = exp(-1.0956)#0.334
 cpred4 = predict(cmodel41,newdata = tst4,type = 'response')
 cpred4f = ifelse(cpred4>0.5,1,0)
 confusionMatrix(tst4$PositiveDec,cpred4f)

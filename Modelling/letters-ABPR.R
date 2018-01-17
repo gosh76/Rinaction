@@ -21,12 +21,13 @@ confusionMatrix(pred,trn$letter)
 pred1 = predict(cart1,newdata = tst,type='class')
 confusionMatrix(pred1,tst$letter)
 #Accuracy : 0.8522 - on tst set
-
+cart1
 # building random forest model
 library(randomForest)
 set.seed(1000)
 rf1 = randomForest(letter~.,data=trn)
 rfpred = predict(rf1,newdata = tst,type='class')
+rf1
 rfpred[1:5]
 confusionMatrix(rfpred,tst$letter)
 #Accuracy : 0.9872 - on tst set
